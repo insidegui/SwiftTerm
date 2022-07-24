@@ -122,6 +122,12 @@ open class TerminalView: NSView, NSTextInputClient, NSUserInterfaceValidations {
             resetFont()
         }
     }
+
+    public var enableSmoothFonts = true {
+        didSet {
+            setNeedsDisplay(bounds)
+        }
+    }
     
     public init(frame: CGRect, font: NSFont?) {
         self.fontSet = FontSet (font: font ?? FontSet.defaultFont)

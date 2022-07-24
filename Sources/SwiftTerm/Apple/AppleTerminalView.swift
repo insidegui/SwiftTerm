@@ -640,6 +640,8 @@ extension TerminalView {
                     }
                     context.setFillColor(cgColor)
                 }
+
+                context.setShouldSmoothFonts(enableSmoothFonts)
                 
                 CTFontDrawGlyphs(runFont, runGlyphs, &positions, positions.count, context)
 
