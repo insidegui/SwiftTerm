@@ -642,6 +642,7 @@ extension TerminalView {
                 }
 
                 context.setShouldSmoothFonts(enableSmoothFonts)
+                context.setShouldAntialias(enableSmoothFonts)
                 
                 CTFontDrawGlyphs(runFont, runGlyphs, &positions, positions.count, context)
 
