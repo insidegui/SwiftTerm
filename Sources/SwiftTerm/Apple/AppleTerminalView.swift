@@ -639,7 +639,7 @@ extension TerminalView {
                         context.setFillColorSpace(colorSpace)
                     }
                     context.setFillColor(cgColor)
-                }
+                }                
                 
                 CTFontDrawGlyphs(runFont, runGlyphs, &positions, positions.count, context)
 

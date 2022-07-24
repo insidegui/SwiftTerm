@@ -85,7 +85,7 @@ open class TerminalView: NSView, NSTextInputClient, NSUserInterfaceValidations {
     var terminal: Terminal!
 
     var selection: SelectionService!
-    private var scroller: NSScroller!
+    private lazy var scroller = NSScroller()
     
     // These structures are parallel, maybe should be merged, but one contains the attributed text to render
     var attrStrBuffer: CircularList<ViewLineInfo>!
@@ -258,6 +258,8 @@ open class TerminalView: NSView, NSTextInputClient, NSUserInterfaceValidations {
     
     func setupScroller()
     {
+        guard !bounds.height.isZero, scroller.superview == nil else { return }
+
         let style: NSScroller.Style = .legacy
         let scrollerWidth = NSScroller.scrollerWidth(for: .regular, scrollerStyle: style)
         scroller = NSScroller(frame: NSRect(x: bounds.maxX - scrollerWidth, y: 0, width: scrollerWidth, height: bounds.height))
@@ -268,6 +270,12 @@ open class TerminalView: NSView, NSTextInputClient, NSUserInterfaceValidations {
         addSubview (scroller)
         scroller.action = #selector(scrollerActivated)
         scroller.target = self
+    }
+
+    open override func layout() {
+        super.layout()
+
+        setupScroller()
     }
     
     /// This method sents the `nativeForegroundColor` and `nativeBackgroundColor`
